@@ -40,6 +40,9 @@ return {
 			"vimdoc",
 			"xml",
 			"yaml",
+			"rust",
+			"python",
+			"go",
 		},
 		incremental_selection = {
 			enable = true,

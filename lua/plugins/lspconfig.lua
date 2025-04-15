@@ -1,30 +1,6 @@
 return {
 	"neovim/nvim-lspconfig",
 	dependencies = { "saghen/blink.cmp" },
-	keys = {
-		{ "gd", vim.lsp.buf.definition, desc = "Goto Definition", has = "definition" },
-		{ "gr", vim.lsp.buf.references, desc = "References", nowait = true },
-		{ "gI", vim.lsp.buf.implementation, desc = "Goto Implementation" },
-		{ "gy", vim.lsp.buf.type_definition, desc = "Goto T[y]pe Definition" },
-		{ "gD", vim.lsp.buf.declaration, desc = "Goto Declaration" },
-		{
-			"K",
-			function()
-				return vim.lsp.buf.hover()
-			end,
-			desc = "Hover",
-		},
-		{
-			"gK",
-			function()
-				return vim.lsp.buf.signature_help()
-			end,
-			desc = "Signature Help",
-			has = "signatureHelp",
-		},
-		{ "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "v" }, has = "codeAction" },
-		{ "<leader>cr", vim.lsp.buf.rename, desc = "Rename", has = "rename" },
-	},
 	opts = {
 		servers = {
 			lua_ls = {},
@@ -34,6 +10,37 @@ return {
 		},
 	},
 	config = function(_, opts)
+		local map = function(keys, func, desc, mode)
+			mode = mode or "n"
+			vim.keymap.set(mode, keys, func, { desc = "LSP: " .. desc })
+		end
+
+		map("gd", vim.lsp.buf.definition, "Go to definition")
+		map("gr", vim.lsp.buf.references, "Go to references")
+		map("gI", vim.lsp.buf.implementation, "Goto Implementation")
+		map("gy", vim.lsp.buf.type_definition, "Goto T[y]pe Definition")
+		map("gD", vim.lsp.buf.declaration, "Goto Declaration")
+		map("K", function()
+			return vim.lsp.buf.hover()
+		end, "Hover")
+		map("gK", function()
+			return vim.lsp.buf.signature_help()
+		end, "Signature Help")
+
+		vim.diagnostic.config({
+			virtual_text = {
+				prefix = "■",
+				spacing = 4,
+			},
+			signs = false,
+			underline = false,
+			severity_sort = true, -- Sort diagnostics by severity
+			float = {
+				border = "rounded", -- 'single', 'double', 'rounded', etc
+				source = "always", -- Show source in floating window
+			},
+		})
+
 		local lspconfig = require("lspconfig")
 		for server, config in pairs(opts.servers) do
 			config.capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)

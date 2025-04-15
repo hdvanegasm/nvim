@@ -35,8 +35,8 @@ return {
 					columns = { { "label", "label_description", gap = 1 }, { "kind_icon", "kind" } },
 				},
 			},
-			documentation = { auto_show = true, auto_show_delay_ms = 300},
-			trigger = { show_on_trigger_character = true },
+			documentation = { auto_show = true, auto_show_delay_ms = 300 },
+			trigger = { show_on_trigger_character = true, show_on_blocked_trigger_characters = { " ", "\n", "\t" } },
 		},
 
 		-- Default list of enabled providers defined so that you can extend it
