@@ -4,7 +4,9 @@ return {
 	opts = {
 		servers = {
 			lua_ls = {},
-			clangd = {},
+			clangd = {
+				cmd = { "clangd", "--limit-references=0", "--limit-results=0" },
+			},
 			gopls = {},
 			rust_analyzer = {},
 		},
@@ -26,6 +28,20 @@ return {
 		map("gK", function()
 			return vim.lsp.buf.signature_help()
 		end, "Signature Help")
+
+		if vim.lsp.inlay_hint then
+			-- Enable inlay hints.
+			vim.lsp.inlay_hint.enable(true, { 0 })
+
+			-- Toggle inlay hints.
+			map("ch", function()
+				if vim.lsp.inlay_hint.is_enabled() then
+					vim.lsp.inlay_hint.enable(false, { bufnr })
+				else
+					vim.lsp.inlay_hint.enable(true, { bufnr })
+				end
+			end, "Toggle Inlay Hints")
+		end
 
 		vim.diagnostic.config({
 			virtual_text = {
