@@ -8,7 +8,15 @@ return {
 				cmd = { "clangd", "--limit-references=0", "--limit-results=0" },
 			},
 			gopls = {},
-			rust_analyzer = {},
+			rust_analyzer = {
+				diagnostics = {
+					enable = true,
+				},
+				semanticHighlighting = {
+					strings = true,
+				}
+			},
+			texlab = {},
 		},
 	},
 	config = function(_, opts)

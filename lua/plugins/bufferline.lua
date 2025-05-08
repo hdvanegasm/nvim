@@ -17,7 +17,7 @@ return {
 	opts = {
 		options = {
 			diagnostics = "nvim_lsp",
-			always_show_bufferline = true,
+			always_show_bufferline = false,
 			offsets = {
 				{
 					filetype = "neo-tree",

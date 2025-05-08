@@ -1,19 +1,24 @@
 return {
 	"stevearc/conform.nvim",
 	cmd = "ConformInfo",
+	event = { "BufWritePre" },
 	keys = {
 		{
 			"<leader>cF",
 			function()
-				require("conform").format({ bufnr = 0 })
+				require("conform").format({ async = true })
 			end,
-			mode = { "n", "v" },
+			mode = "",
+			desc = "Format buffer",
 		},
 	},
+	---@module "conform"
+	---@type conform.setupOpts
 	opts = {
 		format_on_save = {
-			-- These options will be passed to conform.format()
-			timeout_ms = 500,
+			timeout_ms = 700,
+		},
+		default_format_opts = {
 			lsp_format = "fallback",
 		},
 		formatters_by_ft = {
