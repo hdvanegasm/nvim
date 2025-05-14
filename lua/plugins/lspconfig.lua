@@ -5,18 +5,58 @@ return {
 		servers = {
 			lua_ls = {},
 			clangd = {
-				cmd = { "clangd", "--limit-references=0", "--limit-results=0" },
+				cmd = {
+					"clangd",
+					"--background-index",
+					"--clang-tidy",
+					"--header-insertion=iwyu",
+					"--completion-style=detailed",
+					"--function-arg-placeholders",
+					"--fallback-style=llvm",
+				},
+				init_options = {
+					usePlaceholders = true,
+					completeUnimported = true,
+					clangdFileStatus = true,
+				},
+				keys = {
+					{ "<leader>ch", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header (C/C++)" },
+				},
 			},
-			gopls = {},
+			gopls = {
+				gofumpt = true,
+				hints = {
+					assignVariableTypes = true,
+					compositeLiteralFields = true,
+					compositeLiteralTypes = true,
+					constantValues = true,
+					functionTypeParameters = true,
+					parameterNames = true,
+					rangeVariableTypes = true,
+				},
+				analyses = {
+					nilness = true,
+					unusedparams = true,
+					unusedwrite = true,
+					useany = true,
+				},
+				usePlaceholders = true,
+				completeUnimported = true,
+				staticcheck = true,
+				sematicTokens = true,
+			},
 			rust_analyzer = {
 				diagnostics = {
 					enable = true,
 				},
 				semanticHighlighting = {
 					strings = true,
-				}
+				},
 			},
 			texlab = {},
+			ruff = {},
+			marksman = {},
+			neocmake = {},
 		},
 	},
 	config = function(_, opts)
