@@ -16,4 +16,5 @@ return {
 			desc = "Find Plugin File",
 		},
 	},
+	opts = {},
 }

@@ -1,7 +1,7 @@
 return {
 	"stevearc/conform.nvim",
 	cmd = "ConformInfo",
-	event = { "BufWritePre" },
+	lazy = false,
 	keys = {
 		{
 			"<leader>cF",
@@ -33,7 +33,4 @@ return {
 		notify_on_error = true,
 		notify_no_formaters = true,
 	},
-	config = function(_, opts)
-		require("conform").setup(opts)
-	end,
 }

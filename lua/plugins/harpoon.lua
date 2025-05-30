@@ -39,7 +39,4 @@ return {
 		end
 		return keys
 	end,
-	config = function(_, opts)
-		require("harpoon").setup(opts)
-	end,
 }

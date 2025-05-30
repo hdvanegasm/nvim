@@ -1,7 +1,8 @@
 return {
 	"saghen/blink.cmp",
-	dependencies = { "rafamadriz/friendly-snippets" },
+	dependencies = { "L3MON4D3/LuaSnip", version = "v2.*" },
 	version = "1.*",
+	build = "cargo +nightly build --release",
 	lazy = false,
 
 	---@module 'blink.cmp'
@@ -44,6 +45,8 @@ return {
 		sources = {
 			default = { "lsp", "path", "snippets", "buffer" },
 		},
+
+		snippets = { preset = "luasnip" },
 
 		-- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
 		-- You may use a lua implementation instead by using `implementation = "lua"` or fallback to the lua implementation,
