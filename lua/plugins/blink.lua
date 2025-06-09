@@ -56,7 +56,4 @@ return {
 		fuzzy = { implementation = "prefer_rust_with_warning" },
 	},
 	opts_extend = { "sources.default" },
-	config = function(_, opts)
-		require("blink.cmp").setup(opts)
-	end,
 }

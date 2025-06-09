@@ -56,7 +56,13 @@ return {
 			end,
 			desc = "Explorer NeoTree (cwd)",
 		},
-		{ "<leader>e", "<leader>fe", desc = "Explorer NeoTree (Root Dir)", remap = true },
+		{
+			"<leader>e",
+			function()
+				require("neo-tree.command").execute({ action = "focus" })
+			end,
+			desc = "Explorer NeoTree (Root Dir)",
+		},
 		{ "<leader>E", "<leader>fE", desc = "Explorer NeoTree (cwd)", remap = true },
 		{
 			"<leader>ge",
