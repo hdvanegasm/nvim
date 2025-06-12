@@ -96,7 +96,6 @@ return {
 				prefix = "■",
 				spacing = 4,
 			},
-			signs = false,
 			underline = false,
 			severity_sort = true, -- Sort diagnostics by severity
 			float = {

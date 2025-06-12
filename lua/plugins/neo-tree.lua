@@ -11,6 +11,8 @@ return {
 	---@module "neo-tree"
 	---@type neotree.Config?
 	opts = {
+		enable_git_status = true,
+		enable_diagnostics = true,
 		filesystem = {
 			bind_to_cwd = false,
 			follow_current_file = { enabled = true },
@@ -18,6 +20,8 @@ return {
 		},
 		sources = { "filesystem", "buffers", "git_status" },
 		window = {
+			position = "left",
+			width = 35,
 			mappings = {
 				["l"] = "open",
 				["h"] = "close_node",
@@ -35,6 +39,8 @@ return {
 		},
 		default_component_configs = {
 			indent = {
+				indent_size = 1,
+				padding = 1,
 				with_expanders = true, -- if nil and file nesting is enabled, will enable expanders
 				expander_collapsed = "",
 				expander_expanded = "",
@@ -42,8 +48,11 @@ return {
 			},
 			git_status = {
 				symbols = {
+					untracked = "?",
+					ignored = "",
 					unstaged = "󰄱",
-					staged = "󰱒",
+					staged = "",
+					conflict = "",
 				},
 			},
 		},
