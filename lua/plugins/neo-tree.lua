@@ -39,7 +39,7 @@ return {
 		},
 		default_component_configs = {
 			indent = {
-				indent_size = 1,
+				indent_size = 2,
 				padding = 1,
 				with_expanders = true, -- if nil and file nesting is enabled, will enable expanders
 				expander_collapsed = "",

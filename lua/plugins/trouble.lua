@@ -1,6 +1,7 @@
 return {
 	"folke/trouble.nvim",
 	opts = {},
+	lazy = true,
 	cmd = "Trouble",
 	keys = {
 		{
