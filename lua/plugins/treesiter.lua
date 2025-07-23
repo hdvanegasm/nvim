@@ -1,8 +1,8 @@
 return {
 	"nvim-treesitter/nvim-treesitter",
-	version = false, -- last release is way too old and doesn't work on Windows
+	branch = "master",
 	build = ":TSUpdate",
-	lazy = vim.fn.argc(-1) == 0, -- load treesitter early when opening a file from the cmdline
+	lazy = false,
 	cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
 	keys = {
 		{ "<c-space>", desc = "Increment Selection" },
@@ -13,7 +13,10 @@ return {
 	---@type TSConfig
 	---@diagnostic disable-next-line: missing-fields
 	opts = {
-		highlight = { enable = true },
+		highlight = {
+			enable = true,
+			additional_vim_regex_highlighting = false,
+		},
 		indent = { enable = true },
 		ensure_installed = {
 			"bash",
@@ -31,6 +34,7 @@ return {
 			"jsdoc",
 			"json",
 			"jsonc",
+			"latex",
 			"lua",
 			"luadoc",
 			"luap",
@@ -49,9 +53,6 @@ return {
 			"vimdoc",
 			"xml",
 			"yaml",
-			"rust",
-			"python",
-			"go",
 		},
 		incremental_selection = {
 			enable = true,
@@ -76,4 +77,7 @@ return {
 			},
 		},
 	},
+	config = function(_, opts)
+		require("nvim-treesitter.configs").setup(opts)
+	end,
 }

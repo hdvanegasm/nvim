@@ -29,7 +29,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
 -- Highlight mutable variables
-vim.api.nvim_set_hl(0, "@lsp.mod.mutable", { underline = true })
+-- vim.api.nvim_set_hl(0, "@lsp.mod.mutable", { underline = true })
 
 -- Setup lazy.nvim
 require("lazy").setup({
