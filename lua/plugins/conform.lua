@@ -29,8 +29,12 @@ return {
 			rust = { "rustfmt", lsp_format = "fallback" },
 			-- Conform will run the first available formatter
 			javascript = { "prettierd", "prettier", stop_after_first = true },
+			go = { "goimports", "gofmt" },
+			c = { "clang-format" },
+			cpp = { "clang-format" },
+			markdown = { "prettier" },
 		},
 		notify_on_error = true,
-		notify_no_formaters = true,
+		notify_no_formatters = true,
 	},
 }

@@ -24,37 +24,55 @@ return {
 				},
 			},
 			gopls = {
-				gofumpt = true,
-				hints = {
-					assignVariableTypes = true,
-					compositeLiteralFields = true,
-					compositeLiteralTypes = true,
-					constantValues = true,
-					functionTypeParameters = true,
-					parameterNames = true,
-					rangeVariableTypes = true,
+				settings = {
+					gopls = {
+						gofumpt = true,
+						hints = {
+							assignVariableTypes = true,
+							compositeLiteralFields = true,
+							compositeLiteralTypes = true,
+							constantValues = true,
+							functionTypeParameters = true,
+							parameterNames = true,
+							rangeVariableTypes = true,
+						},
+						analyses = {
+							nilness = true,
+							unusedparams = true,
+							unusedwrite = true,
+							useany = true,
+						},
+						usePlaceholders = true,
+						completeUnimported = true,
+						staticcheck = true,
+						semanticTokens = true,
+					},
 				},
-				analyses = {
-					nilness = true,
-					unusedparams = true,
-					unusedwrite = true,
-					useany = true,
-				},
-				usePlaceholders = true,
-				completeUnimported = true,
-				staticcheck = true,
-				sematicTokens = true,
 			},
 			rust_analyzer = {
-				diagnostics = {
-					enable = true,
-				},
-				semanticHighlighting = {
-					strings = true,
+				settings = {
+					["rust-analyzer"] = {
+						diagnostics = {
+							enable = true,
+						},
+						semanticHighlighting = {
+							strings = true,
+						},
+					},
 				},
 			},
 			texlab = {},
 			ruff = {},
+			basedpyright = {
+				settings = {
+					basedpyright = {
+						disableOrganizeImports = true,
+						analysis = {
+							ignore = { "*" },
+						},
+					},
+				},
+			},
 			marksman = {},
 			neocmake = {},
 		},
@@ -82,12 +100,8 @@ return {
 			vim.lsp.inlay_hint.enable(true, { 0 })
 
 			-- Toggle inlay hints.
-			map("ch", function()
-				if vim.lsp.inlay_hint.is_enabled() then
-					vim.lsp.inlay_hint.enable(false, { bufnr })
-				else
-					vim.lsp.inlay_hint.enable(true, { bufnr })
-				end
+			map("<leader>ci", function()
+				vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = 0 }), { bufnr = 0 })
 			end, "Toggle Inlay Hints")
 		end
 
@@ -104,10 +118,9 @@ return {
 			},
 		})
 
-		local lspconfig = require("lspconfig")
 		for server, config in pairs(opts.servers) do
 			config.capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
-			lspconfig[server].setup(config)
+			vim.lsp.config(server, config)
 		end
 	end,
 }

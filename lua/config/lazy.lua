@@ -31,6 +31,12 @@ vim.g.maplocalleader = "\\"
 -- Highlight mutable variables
 -- vim.api.nvim_set_hl(0, "@lsp.mod.mutable", { underline = true })
 
+
+-- Initialize wildcard LSP config before plugins load (required by blink.cmp >= 1.x on nvim 0.11+)
+if vim.fn.has("nvim-0.11") == 1 and vim.lsp and vim.lsp.config then
+	vim.lsp.config("*", {})
+end
+
 -- Setup lazy.nvim
 require("lazy").setup({
 	spec = {
@@ -39,7 +45,7 @@ require("lazy").setup({
 	},
 	-- Configure any other settings here. See the documentation for more details.
 	-- colorscheme that will be used when installing plugins.
-	install = { colorscheme = { "gruvbox" } },
+	install = { colorscheme = { "tokyonight" } },
 	-- automatically check for plugin updates
 	checker = { enabled = false },
 })

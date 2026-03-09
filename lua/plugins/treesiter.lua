@@ -4,6 +4,7 @@ return {
 	build = ":TSUpdate",
 	lazy = false,
 	cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
+	dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
 	keys = {
 		{ "<c-space>", desc = "Increment Selection" },
 		{ "<bs>", desc = "Decrement Selection", mode = "x" },
