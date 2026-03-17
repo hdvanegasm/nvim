@@ -23,6 +23,7 @@ vim.opt.relativenumber = true
 vim.opt.shiftwidth = 4
 vim.opt.smartindent = true
 vim.opt.undofile = true
+vim.opt.scrolloff = 8
 
 -- Leaders setup
 vim.g.mapleader = " "
