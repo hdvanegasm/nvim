@@ -88,6 +88,7 @@ return {
 		map("gI", vim.lsp.buf.implementation, "Goto Implementation")
 		map("gy", vim.lsp.buf.type_definition, "Goto T[y]pe Definition")
 		map("gD", vim.lsp.buf.declaration, "Goto Declaration")
+		map("<leader>cr", vim.lsp.buf.rename, "Rename")
 		map("K", function()
 			return vim.lsp.buf.hover()
 		end, "Hover")
