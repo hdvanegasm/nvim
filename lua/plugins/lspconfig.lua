@@ -83,10 +83,10 @@ return {
 			vim.keymap.set(mode, keys, func, { desc = "LSP: " .. desc })
 		end
 
-		map("gd", vim.lsp.buf.definition, "Go to definition")
-		map("gr", vim.lsp.buf.references, "Go to references")
-		map("gI", vim.lsp.buf.implementation, "Goto Implementation")
-		map("gy", vim.lsp.buf.type_definition, "Goto T[y]pe Definition")
+		map("gd", require("telescope.builtin").lsp_definitions, "Go to definition")
+		map("gr", require("telescope.builtin").lsp_references, "Go to references")
+		map("gI", require("telescope.builtin").lsp_implementations, "Goto Implementation")
+		map("gy", require("telescope.builtin").lsp_type_definitions, "Goto T[y]pe Definition")
 		map("gD", vim.lsp.buf.declaration, "Goto Declaration")
 		map("<leader>cr", vim.lsp.buf.rename, "Rename")
 		map("K", function()

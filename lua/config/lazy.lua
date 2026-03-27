@@ -25,6 +25,16 @@ vim.opt.smartindent = true
 vim.opt.undofile = true
 vim.opt.scrolloff = 8
 
+-- Search
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
+
+-- UI
+vim.opt.signcolumn = "yes"
+vim.opt.cursorline = true
+vim.opt.splitright = true
+vim.opt.splitbelow = true
+
 -- Leaders setup
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
