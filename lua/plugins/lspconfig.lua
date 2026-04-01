@@ -95,10 +95,12 @@ return {
 		map("gK", function()
 			return vim.lsp.buf.signature_help()
 		end, "Signature Help")
+		map("gra", vim.lsp.buf.code_action, "Code Action", { "n", "v" })
+		map("gO", require("telescope.builtin").lsp_document_symbols, "Document Symbols")
 
 		if vim.lsp.inlay_hint then
-			-- Enable inlay hints.
-			vim.lsp.inlay_hint.enable(true, { 0 })
+			-- Enable inlay hints globally.
+			vim.lsp.inlay_hint.enable(true)
 
 			-- Toggle inlay hints.
 			map("<leader>ci", function()

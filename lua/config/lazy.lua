@@ -34,6 +34,7 @@ vim.opt.signcolumn = "yes"
 vim.opt.cursorline = true
 vim.opt.splitright = true
 vim.opt.splitbelow = true
+vim.opt.pumborder = "rounded"
 
 -- Leaders setup
 vim.g.mapleader = " "
