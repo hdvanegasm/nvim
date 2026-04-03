@@ -13,6 +13,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 		os.exit(1)
 	end
 end
+
 vim.opt.rtp:prepend(lazypath)
 
 -- Tabs look like 4 spaces
@@ -42,7 +43,6 @@ vim.g.maplocalleader = "\\"
 
 -- Highlight mutable variables
 -- vim.api.nvim_set_hl(0, "@lsp.mod.mutable", { underline = true })
-
 
 -- Initialize wildcard LSP config before plugins load (required by blink.cmp >= 1.x on nvim 0.11+)
 if vim.fn.has("nvim-0.11") == 1 and vim.lsp and vim.lsp.config then
