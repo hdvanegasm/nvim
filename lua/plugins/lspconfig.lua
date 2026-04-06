@@ -77,6 +77,8 @@ return {
 			neocmake = {},
 			taplo = {},
 			jsonls = {},
+			bashls = {},
+			fish_lsp = {},
 		},
 	},
 	config = function(_, opts)
@@ -85,30 +87,24 @@ return {
 			vim.keymap.set(mode, keys, func, { desc = "LSP: " .. desc })
 		end
 
+		-- Telescope-enhanced LSP navigation (overrides defaults with fuzzy picker)
 		map("gd", require("telescope.builtin").lsp_definitions, "Go to definition")
-		map("gr", require("telescope.builtin").lsp_references, "Go to references")
+		map("grr", require("telescope.builtin").lsp_references, "Go to references")
 		map("gI", require("telescope.builtin").lsp_implementations, "Goto Implementation")
 		map("gy", require("telescope.builtin").lsp_type_definitions, "Goto T[y]pe Definition")
+		map("gO", require("telescope.builtin").lsp_document_symbols, "Document Symbols")
+
+		-- LSP actions (align with 0.12 defaults: grn=rename, gra=code_action, K=hover)
 		map("gD", vim.lsp.buf.declaration, "Goto Declaration")
-		map("<leader>cr", vim.lsp.buf.rename, "Rename")
-		map("K", function()
-			return vim.lsp.buf.hover()
-		end, "Hover")
 		map("gK", function()
 			return vim.lsp.buf.signature_help()
 		end, "Signature Help")
-		map("gra", vim.lsp.buf.code_action, "Code Action", { "n", "v" })
-		map("gO", require("telescope.builtin").lsp_document_symbols, "Document Symbols")
 
-		if vim.lsp.inlay_hint then
-			-- Enable inlay hints globally.
-			vim.lsp.inlay_hint.enable(true)
-
-			-- Toggle inlay hints.
-			map("<leader>ci", function()
-				vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = 0 }), { bufnr = 0 })
-			end, "Toggle Inlay Hints")
-		end
+		-- Inlay hints
+		vim.lsp.inlay_hint.enable(true)
+		map("<leader>ci", function()
+			vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = 0 }), { bufnr = 0 })
+		end, "Toggle Inlay Hints")
 
 		vim.diagnostic.config({
 			virtual_text = {
@@ -119,7 +115,7 @@ return {
 			severity_sort = true, -- Sort diagnostics by severity
 			float = {
 				border = "rounded", -- 'single', 'double', 'rounded', etc
-				source = "always", -- Show source in floating window
+				source = true, -- Show source in floating window
 			},
 		})
 

@@ -1,6 +1,6 @@
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not (vim.uv or vim.loop).fs_stat(lazypath) then
+if not vim.uv.fs_stat(lazypath) then
 	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
 	local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
 	if vim.v.shell_error ~= 0 then
@@ -35,7 +35,7 @@ vim.opt.signcolumn = "yes"
 vim.opt.cursorline = true
 vim.opt.splitright = true
 vim.opt.splitbelow = true
-
+vim.opt.pumborder = "rounded"
 
 -- Leaders setup
 vim.g.mapleader = " "
@@ -44,10 +44,8 @@ vim.g.maplocalleader = "\\"
 -- Highlight mutable variables
 -- vim.api.nvim_set_hl(0, "@lsp.mod.mutable", { underline = true })
 
--- Initialize wildcard LSP config before plugins load (required by blink.cmp >= 1.x on nvim 0.11+)
-if vim.fn.has("nvim-0.11") == 1 and vim.lsp and vim.lsp.config then
-	vim.lsp.config("*", {})
-end
+-- Initialize wildcard LSP config before plugins load (required by blink.cmp >= 1.x)
+vim.lsp.config("*", {})
 
 -- Setup lazy.nvim
 require("lazy").setup({
