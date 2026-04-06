@@ -75,6 +75,8 @@ return {
 			},
 			marksman = {},
 			neocmake = {},
+			taplo = {},
+			jsonls = {},
 		},
 	},
 	config = function(_, opts)
