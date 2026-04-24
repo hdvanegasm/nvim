@@ -7,9 +7,9 @@ return {
 	},
 	keys = {
 		{ "<leader>ff", require("telescope.builtin").find_files, desc = "Find files" },
-		{ "<leader>fg", require("telescope.builtin").live_grep, desc = "Live grep" },
-		{ "<leader>fb", require("telescope.builtin").buffers, desc = "Buffers" },
-		{ "<leader>fh", require("telescope.builtin").help_tags, desc = "Help tags" },
+		{ "<leader>fg", require("telescope.builtin").live_grep, desc = "Search text in files" },
+		{ "<leader>fb", require("telescope.builtin").buffers, desc = "List open buffers" },
+		{ "<leader>fh", require("telescope.builtin").help_tags, desc = "Search help tags" },
 	},
 	config = function(_, opts)
 		local telescope = require("telescope")

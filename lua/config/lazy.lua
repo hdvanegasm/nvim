@@ -31,11 +31,21 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
 -- UI
+vim.opt.termguicolors = true
 vim.opt.signcolumn = "yes"
 vim.opt.cursorline = true
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 vim.opt.pumborder = "rounded"
+
+-- Disable unused remote providers
+vim.g.loaded_node_provider = 0
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_python3_provider = 0
+vim.g.loaded_ruby_provider = 0
+
+-- Register gotmpl filetype
+vim.filetype.add({ extension = { gotmpl = "gotmpl" } })
 
 -- Leaders setup
 vim.g.mapleader = " "
@@ -59,3 +69,5 @@ require("lazy").setup({
 	-- automatically check for plugin updates
 	checker = { enabled = false },
 })
+
+vim.cmd.colorscheme("default")

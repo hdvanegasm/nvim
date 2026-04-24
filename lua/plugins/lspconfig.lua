@@ -95,6 +95,11 @@ return {
 		map("gO", require("telescope.builtin").lsp_document_symbols, "Document Symbols")
 
 		-- LSP actions (align with 0.12 defaults: grn=rename, gra=code_action, K=hover)
+		map("grn", vim.lsp.buf.rename, "Rename")
+		map("gra", vim.lsp.buf.code_action, "Code Action", { "n", "x" })
+		map("gri", require("telescope.builtin").lsp_implementations, "Goto Implementation")
+		map("grt", require("telescope.builtin").lsp_type_definitions, "Goto Type Definition")
+		map("grx", vim.lsp.codelens.run, "Run Code Lens")
 		map("gD", vim.lsp.buf.declaration, "Goto Declaration")
 		map("gK", function()
 			return vim.lsp.buf.signature_help()

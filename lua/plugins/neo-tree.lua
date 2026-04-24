@@ -70,7 +70,7 @@ return {
 			function()
 				require("neo-tree.command").execute({ action = "focus" })
 			end,
-			desc = "Explorer NeoTree (Root Dir)",
+			desc = "Focus NeoTree",
 		},
 		{ "<leader>E", "<leader>fE", desc = "Explorer NeoTree (cwd)", remap = true },
 		{

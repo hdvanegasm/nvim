@@ -1,5 +1,5 @@
 return {
-	"ellisonleao/gruvbox.nvim",
+	"miikanissi/modus-themes.nvim",
 	lazy = true,
 	opts = {},
 }

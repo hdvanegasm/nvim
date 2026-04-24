@@ -8,4 +8,9 @@ return {
 			},
 		},
 	},
+	config = function(_, opts)
+		local fidget = require("fidget")
+		fidget.setup(opts)
+		vim.notify = fidget.notify
+	end,
 }

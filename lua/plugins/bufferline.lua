@@ -3,7 +3,7 @@ return {
 	dependencies = "nvim-tree/nvim-web-devicons",
 	lazy = false,
 	keys = {
-		{ "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Toggle Pin" },
+		{ "<leader>bp", "<Cmd>BufferLineTogglePin<CR>", desc = "Pin/Unpin buffer" },
 		{ "<leader>bP", "<Cmd>BufferLineGroupClose ungrouped<CR>", desc = "Delete Non-Pinned Buffers" },
 		{ "<leader>br", "<Cmd>BufferLineCloseRight<CR>", desc = "Delete Buffers to the Right" },
 		{ "<leader>bl", "<Cmd>BufferLineCloseLeft<CR>", desc = "Delete Buffers to the Left" },
@@ -11,8 +11,8 @@ return {
 		{ "<S-l>", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
 		{ "[b", "<cmd>BufferLineCyclePrev<cr>", desc = "Prev Buffer" },
 		{ "]b", "<cmd>BufferLineCycleNext<cr>", desc = "Next Buffer" },
-		{ "[B", "<cmd>BufferLineMovePrev<cr>", desc = "Move buffer prev" },
-		{ "]B", "<cmd>BufferLineMoveNext<cr>", desc = "Move buffer next" },
+		{ "[B", "<cmd>BufferLineMovePrev<cr>", desc = "Move Buffer Left" },
+		{ "]B", "<cmd>BufferLineMoveNext<cr>", desc = "Move Buffer Right" },
 	},
 	opts = {
 		options = {
