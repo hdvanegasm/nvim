@@ -7,5 +7,6 @@ return {
 	opts = {
 		completions = { lsp = { enabled = true } },
 		latex = { enabled = false },
+		code = { background_inset = 0 },
 	},
 }

@@ -58,6 +58,9 @@ return {
 						semanticHighlighting = {
 							strings = true,
 						},
+						cachePriming = {
+							numThreads = 3,
+						},
 					},
 				},
 			},
