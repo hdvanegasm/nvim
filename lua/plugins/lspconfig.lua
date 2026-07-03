@@ -19,9 +19,6 @@ return {
 					completeUnimported = true,
 					clangdFileStatus = true,
 				},
-				keys = {
-					{ "<leader>ch", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header (C/C++)" },
-				},
 			},
 			gopls = {
 				settings = {
@@ -64,7 +61,22 @@ return {
 					},
 				},
 			},
-			texlab = {},
+			texlab = {
+				settings = {
+					texlab = {
+						-- Lint with chktex (dnf: texlive-chktex)
+						chktex = {
+							onOpenAndSave = true,
+							onEdit = false,
+						},
+						diagnosticsDelay = 300,
+						latexFormatter = "latexindent",
+						latexindent = {
+							modifyLineBreaks = false,
+						},
+					},
+				},
+			},
 			ruff = {},
 			basedpyright = {
 				settings = {
@@ -82,42 +94,66 @@ return {
 			jsonls = {},
 			bashls = {},
 			fish_lsp = {},
+			solidity_ls_nomicfoundation = {},
 		},
 	},
 	config = function(_, opts)
-		local map = function(keys, func, desc, mode)
-			mode = mode or "n"
-			vim.keymap.set(mode, keys, func, { desc = "LSP: " .. desc })
-		end
+		-- Buffer-local keymaps, only where a server is attached.
+		-- grn=rename, gra=code_action, K=hover are 0.12 defaults and left untouched.
+		vim.api.nvim_create_autocmd("LspAttach", {
+			group = vim.api.nvim_create_augroup("user-lsp-attach", { clear = true }),
+			callback = function(event)
+				local map = function(keys, func, desc, mode)
+					mode = mode or "n"
+					vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
+				end
 
-		-- Telescope-enhanced LSP navigation (overrides defaults with fuzzy picker)
-		map("gd", require("telescope.builtin").lsp_definitions, "Go to definition")
-		map("grr", require("telescope.builtin").lsp_references, "Go to references")
-		map("gI", require("telescope.builtin").lsp_implementations, "Goto Implementation")
-		map("gy", require("telescope.builtin").lsp_type_definitions, "Goto T[y]pe Definition")
-		map("gO", require("telescope.builtin").lsp_document_symbols, "Document Symbols")
+				-- Telescope-enhanced LSP navigation (overrides defaults with fuzzy picker)
+				map("gd", function()
+					require("telescope.builtin").lsp_definitions()
+				end, "Go to definition")
+				map("grr", function()
+					require("telescope.builtin").lsp_references()
+				end, "List references")
+				map("gri", function()
+					require("telescope.builtin").lsp_implementations()
+				end, "Go to implementation")
+				map("grt", function()
+					require("telescope.builtin").lsp_type_definitions()
+				end, "Go to type definition")
+				map("gO", function()
+					require("telescope.builtin").lsp_document_symbols()
+				end, "Search document symbols")
 
-		-- LSP actions (align with 0.12 defaults: grn=rename, gra=code_action, K=hover)
-		map("grn", vim.lsp.buf.rename, "Rename")
-		map("gra", vim.lsp.buf.code_action, "Code Action", { "n", "x" })
-		map("gri", require("telescope.builtin").lsp_implementations, "Goto Implementation")
-		map("grt", require("telescope.builtin").lsp_type_definitions, "Goto Type Definition")
-		map("grx", vim.lsp.codelens.run, "Run Code Lens")
-		map("gD", vim.lsp.buf.declaration, "Goto Declaration")
-		map("gK", function()
-			return vim.lsp.buf.signature_help()
-		end, "Signature Help")
+				map("grx", vim.lsp.codelens.run, "Run code lens")
+				map("gD", vim.lsp.buf.declaration, "Go to declaration")
+				map("gK", vim.lsp.buf.signature_help, "Show signature help")
+
+				local client = vim.lsp.get_client_by_id(event.data.client_id)
+				if client and client.name == "clangd" then
+					map("<leader>ch", "<cmd>LspClangdSwitchSourceHeader<cr>", "Switch source / header (C/C++)")
+				end
+			end,
+		})
 
 		-- Inlay hints
 		vim.lsp.inlay_hint.enable(true)
-		map("<leader>ci", function()
+		vim.keymap.set("n", "<leader>uh", function()
 			vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = 0 }), { bufnr = 0 })
-		end, "Toggle Inlay Hints")
+		end, { desc = "LSP: Toggle inlay hints" })
 
 		vim.diagnostic.config({
 			virtual_text = {
 				prefix = "■",
 				spacing = 4,
+			},
+			signs = {
+				text = {
+					[vim.diagnostic.severity.ERROR] = " ",
+					[vim.diagnostic.severity.WARN] = " ",
+					[vim.diagnostic.severity.INFO] = " ",
+					[vim.diagnostic.severity.HINT] = " ",
+				},
 			},
 			underline = false,
 			severity_sort = true, -- Sort diagnostics by severity

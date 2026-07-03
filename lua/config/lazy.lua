@@ -37,6 +37,7 @@ vim.opt.cursorline = true
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 vim.opt.pumborder = "rounded"
+vim.opt.showmode = false -- mode is already shown by lualine
 
 -- Disable unused remote providers
 vim.g.loaded_node_provider = 0
@@ -51,9 +52,6 @@ vim.filetype.add({ extension = { gotmpl = "gotmpl" } })
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
--- Highlight mutable variables
--- vim.api.nvim_set_hl(0, "@lsp.mod.mutable", { underline = true })
-
 -- Initialize wildcard LSP config before plugins load (required by blink.cmp >= 1.x)
 vim.lsp.config("*", {})
 
@@ -63,11 +61,6 @@ require("lazy").setup({
 		-- import your plugins
 		{ import = "plugins" },
 	},
-	-- Configure any other settings here. See the documentation for more details.
-	-- colorscheme that will be used when installing plugins.
-	install = { colorscheme = { "tokyonight" } },
 	-- automatically check for plugin updates
 	checker = { enabled = false },
 })
-
-vim.cmd.colorscheme("default")

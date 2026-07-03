@@ -2,14 +2,14 @@ return {
 	"jbyuki/nabla.nvim",
 	keys = {
 		{
-			"<leader>m",
+			"<leader>um",
 			function()
 				require("nabla").toggle_virt()
 			end,
 			desc = "Toggle math rendering",
 		},
 		{
-			"<leader>p",
+			"<leader>up",
 			function()
 				require("nabla").popup()
 			end,

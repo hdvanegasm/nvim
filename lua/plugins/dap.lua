@@ -4,22 +4,29 @@ return {
 		{ "rcarriga/nvim-dap-ui", dependencies = { "nvim-neotest/nvim-nio" } },
 	},
 	keys = {
-		{ "<leader>dc", function() require("dap").continue() end, desc = "Start/Continue debugging" },
-		{ "<leader>do", function() require("dap").step_over() end, desc = "Step Over" },
-		{ "<leader>di", function() require("dap").step_into() end, desc = "Step Into" },
-		{ "<leader>dO", function() require("dap").step_out() end, desc = "Step Out" },
-		{ "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "Toggle Breakpoint" },
-		{ "<leader>dB", function() require("dap").set_breakpoint(vim.fn.input("Condition: ")) end, desc = "Conditional Breakpoint" },
-		{ "<leader>dr", function() require("dap").repl.toggle() end, desc = "Toggle REPL" },
-		{ "<leader>dl", function() require("dap").run_last() end, desc = "Re-run last debug config" },
-		{ "<leader>dt", function() require("dap").terminate() end, desc = "Stop debug session" },
-		{ "<leader>du", function() require("dapui").toggle() end, desc = "Toggle DAP UI" },
+		{ "<leader>dc", function() require("dap").continue() end, desc = "Start / continue execution" },
+		{ "<leader>do", function() require("dap").step_over() end, desc = "Step over line" },
+		{ "<leader>di", function() require("dap").step_into() end, desc = "Step into call" },
+		{ "<leader>dO", function() require("dap").step_out() end, desc = "Step out of function" },
+		{ "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "Toggle breakpoint" },
+		{ "<leader>dB", function() require("dap").set_breakpoint(vim.fn.input("Condition: ")) end, desc = "Set conditional breakpoint" },
+		{ "<leader>dr", function() require("dap").repl.toggle() end, desc = "Toggle debug REPL" },
+		{ "<leader>dl", function() require("dap").run_last() end, desc = "Re-run last config" },
+		{ "<leader>dt", function() require("dap").terminate() end, desc = "Terminate session" },
+		{ "<leader>du", function() require("dapui").toggle() end, desc = "Toggle debugger UI" },
 	},
 	config = function()
 		local dap = require("dap")
 		local dapui = require("dapui")
 
 		dapui.setup()
+
+		-- Nerd-font signs instead of the default letters (B, C, R, L, →)
+		vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DiagnosticError" })
+		vim.fn.sign_define("DapBreakpointCondition", { text = "", texthl = "DiagnosticWarn" })
+		vim.fn.sign_define("DapBreakpointRejected", { text = "", texthl = "DiagnosticError" })
+		vim.fn.sign_define("DapLogPoint", { text = "", texthl = "DiagnosticInfo" })
+		vim.fn.sign_define("DapStopped", { text = "", texthl = "DiagnosticWarn", linehl = "debugPC" })
 
 		-- Auto open/close DAP UI
 		dap.listeners.after.event_initialized["dapui_config"] = function()

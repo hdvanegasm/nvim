@@ -1,11 +1,7 @@
 return {
 	"ThePrimeagen/harpoon",
 	branch = "harpoon2",
-	lazy = true,
 	opts = {
-		menu = {
-			width = vim.api.nvim_win_get_width(0) - 4,
-		},
 		settings = {
 			save_on_toggle = true,
 		},
@@ -13,19 +9,19 @@ return {
 	keys = function()
 		local keys = {
 			{
-				"<leader>H",
+				"<leader>ha",
 				function()
 					require("harpoon"):list():add()
 				end,
-				desc = "Add file to Harpoon",
+				desc = "Pin current file",
 			},
 			{
-				"<leader>h",
+				"<leader>hh",
 				function()
 					local harpoon = require("harpoon")
 					harpoon.ui:toggle_quick_menu(harpoon:list())
 				end,
-				desc = "Harpoon Quick Menu",
+				desc = "Toggle pinned-files menu",
 			},
 		}
 
@@ -35,7 +31,7 @@ return {
 				function()
 					require("harpoon"):list():select(i)
 				end,
-				desc = "Harpoon to File " .. i,
+				desc = "Jump to pinned file " .. i,
 			})
 		end
 		return keys

@@ -3,8 +3,8 @@ return {
 	branch = "v3.x",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
-		"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
 		"MunifTanjim/nui.nvim",
+		-- icons come from mini.icons, which mocks nvim-web-devicons
 		-- {"3rd/image.nvim", opts = {}}, -- Optional image support in preview window: See `# Preview Mode` for more information
 	},
 	lazy = false, -- neo-tree will lazily load itself
@@ -32,7 +32,7 @@ return {
 						local path = node:get_id()
 						vim.fn.setreg("+", path, "c")
 					end,
-					desc = "Copy Path to Clipboard",
+					desc = "Copy path to clipboard",
 				},
 				["P"] = { "toggle_preview", config = { use_float = false } },
 			},
@@ -48,7 +48,7 @@ return {
 			},
 			git_status = {
 				symbols = {
-					untracked = "?",
+					untracked = "",
 					ignored = "",
 					unstaged = "󰄱",
 					staged = "",
@@ -63,29 +63,29 @@ return {
 			function()
 				require("neo-tree.command").execute({ toggle = true, dir = vim.uv.cwd() })
 			end,
-			desc = "Explorer NeoTree (cwd)",
+			desc = "Toggle file explorer (cwd)",
 		},
 		{
 			"<leader>e",
 			function()
 				require("neo-tree.command").execute({ action = "focus" })
 			end,
-			desc = "Focus NeoTree",
+			desc = "Focus file explorer",
 		},
-		{ "<leader>E", "<leader>fE", desc = "Explorer NeoTree (cwd)", remap = true },
+		{ "<leader>E", "<leader>fe", desc = "Toggle file explorer (cwd)", remap = true },
 		{
 			"<leader>ge",
 			function()
 				require("neo-tree.command").execute({ source = "git_status", toggle = true })
 			end,
-			desc = "Git Explorer",
+			desc = "Browse Git changes (tree)",
 		},
 		{
 			"<leader>be",
 			function()
 				require("neo-tree.command").execute({ source = "buffers", toggle = true })
 			end,
-			desc = "Buffer Explorer",
+			desc = "Browse open buffers (tree)",
 		},
 	},
 }

@@ -36,7 +36,6 @@ return {
 				},
 			},
 			documentation = { auto_show = true, auto_show_delay_ms = 300 },
-			trigger = { show_on_trigger_character = true, show_on_blocked_trigger_characters = { " ", "\n", "\t" } },
 		},
 
 		-- Default list of enabled providers defined so that you can extend it
@@ -50,10 +49,6 @@ return {
 					score_offset = 100,
 				},
 			},
-		},
-
-		snippets = {
-			preset = "default",
 		},
 
 		-- (Default) Rust fuzzy matcher for typo resistance and significantly better performance
