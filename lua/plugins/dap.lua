@@ -4,16 +4,76 @@ return {
 		{ "rcarriga/nvim-dap-ui", dependencies = { "nvim-neotest/nvim-nio" } },
 	},
 	keys = {
-		{ "<leader>dc", function() require("dap").continue() end, desc = "Start / continue execution" },
-		{ "<leader>do", function() require("dap").step_over() end, desc = "Step over line" },
-		{ "<leader>di", function() require("dap").step_into() end, desc = "Step into call" },
-		{ "<leader>dO", function() require("dap").step_out() end, desc = "Step out of function" },
-		{ "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "Toggle breakpoint" },
-		{ "<leader>dB", function() require("dap").set_breakpoint(vim.fn.input("Condition: ")) end, desc = "Set conditional breakpoint" },
-		{ "<leader>dr", function() require("dap").repl.toggle() end, desc = "Toggle debug REPL" },
-		{ "<leader>dl", function() require("dap").run_last() end, desc = "Re-run last config" },
-		{ "<leader>dt", function() require("dap").terminate() end, desc = "Terminate session" },
-		{ "<leader>du", function() require("dapui").toggle() end, desc = "Toggle debugger UI" },
+		{
+			"<leader>dc",
+			function()
+				require("dap").continue()
+			end,
+			desc = "Start / continue execution",
+		},
+		{
+			"<leader>do",
+			function()
+				require("dap").step_over()
+			end,
+			desc = "Step over line",
+		},
+		{
+			"<leader>di",
+			function()
+				require("dap").step_into()
+			end,
+			desc = "Step into call",
+		},
+		{
+			"<leader>dO",
+			function()
+				require("dap").step_out()
+			end,
+			desc = "Step out of function",
+		},
+		{
+			"<leader>db",
+			function()
+				require("dap").toggle_breakpoint()
+			end,
+			desc = "Toggle breakpoint",
+		},
+		{
+			"<leader>dB",
+			function()
+				require("dap").set_breakpoint(vim.fn.input("Condition: "))
+			end,
+			desc = "Set conditional breakpoint",
+		},
+		{
+			"<leader>dr",
+			function()
+				require("dap").repl.toggle()
+			end,
+			desc = "Toggle debug REPL",
+		},
+		{
+			"<leader>dl",
+			function()
+				require("dap").run_last()
+			end,
+			desc = "Re-run last config",
+		},
+		{
+			"<leader>dt",
+			function()
+				require("dap").terminate()
+			end,
+			desc = "Terminate session",
+		},
+		{
+			"<leader>du",
+			function()
+				require("dapui").toggle()
+			end,
+			desc = "Toggle debugger UI",
+		},
 	},
 	config = function()
 		local dap = require("dap")

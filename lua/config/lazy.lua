@@ -39,21 +39,25 @@ vim.opt.splitbelow = true
 vim.opt.pumborder = "rounded"
 vim.opt.showmode = false -- mode is already shown by lualine
 
+-- Folds (Tree-sitter foldexpr is set per buffer in treesitter.lua)
+vim.opt.foldlevel = 99 -- start with every fold open; zM closes all, za toggles one
+vim.opt.foldtext = "" -- show the fold's first line with its highlighting
+
 -- Disable unused remote providers
 vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_python3_provider = 0
 vim.g.loaded_ruby_provider = 0
 
--- Register gotmpl filetype
-vim.filetype.add({ extension = { gotmpl = "gotmpl" } })
+-- Register extra filetypes.
+-- `mpc` gets its own filetype (not `python`) on purpose: the syntax only *looks*
+-- like Python, so it borrows Python's highlighting in syntax/mpc.lua while
+-- staying out of reach of the python LSP servers, formatters and parsers.
+vim.filetype.add({ extension = { gotmpl = "gotmpl", mpc = "mpc" } })
 
 -- Leaders setup
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
-
--- Initialize wildcard LSP config before plugins load (required by blink.cmp >= 1.x)
-vim.lsp.config("*", {})
 
 -- Setup lazy.nvim
 require("lazy").setup({
@@ -61,6 +65,10 @@ require("lazy").setup({
 		-- import your plugins
 		{ import = "plugins" },
 	},
+	-- colorscheme applied while plugins install on a fresh checkout
+	install = { colorscheme = { "ember" } },
+	-- no plugin here needs luarocks
+	rocks = { enabled = false },
 	-- automatically check for plugin updates
 	checker = { enabled = false },
 })

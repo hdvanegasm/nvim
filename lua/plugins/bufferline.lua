@@ -16,6 +16,11 @@ return {
 	opts = {
 		options = {
 			diagnostics = "nvim_lsp",
+			-- clicking the "X" closes the buffer without closing the window
+			-- showing it — same behaviour as <leader>bd
+			close_command = function(n)
+				require("mini.bufremove").delete(n, false)
+			end,
 			diagnostics_indicator = function(_, _, diag)
 				local parts = {}
 				if diag.error then

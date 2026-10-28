@@ -19,8 +19,12 @@ return {
 			"Underfull \\\\hbox",
 			"Overfull \\\\hbox",
 		}
-		-- Let treesitter handle syntax highlighting
-		vim.g.vimtex_syntax_enabled = 0
+		-- VimTeX owns LaTeX syntax highlighting. Its `$`/math text objects
+		-- (i$, a$), delimiter tools and conceal all read VimTeX's own syntax
+		-- groups, so Tree-sitter is kept off tex buffers (see treesitter.lua)
+		-- and conceal is switched on via conceallevel (after/ftplugin/tex.lua).
+		-- vimtex_syntax_enabled defaults to 1 and is intentionally left unset;
+		-- do NOT set it to 0 or the `$` text objects recurse (E132).
 		-- Let texlab handle completion via blink.cmp
 		vim.g.vimtex_complete_enabled = 0
 	end,

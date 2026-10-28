@@ -1,5 +1,5 @@
 return {
-	"echasnovski/mini.pairs",
+	"nvim-mini/mini.pairs",
 	-- CmdlineEnter because pairing is also enabled in command mode below
 	event = { "InsertEnter", "CmdlineEnter" },
 	opts = {
